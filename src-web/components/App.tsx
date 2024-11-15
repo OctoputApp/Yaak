@@ -24,12 +24,12 @@ const queryClient = new QueryClient({
   },
 });
 
-const ENABLE_REACT_QUERY_DEVTOOLS = false;
+const ENABLE_REACT_QUERY_DEVTOOLS = true;
 
 export function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      {ENABLE_REACT_QUERY_DEVTOOLS && <ReactQueryDevtools buttonPosition="bottom-left" />}
+      {ENABLE_REACT_QUERY_DEVTOOLS && <ReactQueryDevtools buttonPosition="bottom-right" />}
       <MotionConfig transition={{ duration: 0.1 }}>
         <HelmetProvider>
           <DndProvider backend={HTML5Backend}>

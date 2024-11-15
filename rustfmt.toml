@@ -1,4 +1,3 @@
-edition = "2018"
 
 # Widths
 chain_width = 100

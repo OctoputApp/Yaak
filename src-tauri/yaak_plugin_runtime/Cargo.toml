@@ -11,14 +11,14 @@ log = "0.4.21"
 prost = "0.13.1"
 rand = "0.8.5"
 reqwest = { version = "0.12.5", features = ["stream"] }
-serde = { version = "1.0.198", features = ["derive"] }
-serde_json = "1.0.113"
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
 tauri = { workspace = true }
 tauri-plugin-shell = { workspace = true }
 tokio = { version = "1.0", features = ["macros", "rt-multi-thread", "process"] }
 tonic = "0.12.1"
-ts-rs = "10.0.0"
-thiserror = "1.0.63"
+ts-rs = { workspace = true }
+thiserror = { workspace = true }
 yaak_models = { workspace = true }
 regex = "1.10.6"
 path-slash = "0.2.1"

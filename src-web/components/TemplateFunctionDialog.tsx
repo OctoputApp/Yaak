@@ -17,7 +17,7 @@ import { useFolders } from '../hooks/useFolders';
 import { useHttpRequests } from '../hooks/useHttpRequests';
 import { useRenderTemplate } from '../hooks/useRenderTemplate';
 import { useTemplateTokensToString } from '../hooks/useTemplateTokensToString';
-import { fallbackRequestName } from '../lib/fallbackRequestName';
+import { resolvedModelName } from '../lib/resolvedModelName';
 import { Button } from './core/Button';
 import { Checkbox } from './core/Checkbox';
 import { InlineCode } from './core/InlineCode';
@@ -267,7 +267,9 @@ function HttpRequestArg({
       options={[
         ...httpRequests.map((r) => {
           return {
-            label: buildRequestBreadcrumbs(r, folders).join(' / ') + (r.id == activeRequest?.id ? ' (current)' : ''),
+            label:
+              buildRequestBreadcrumbs(r, folders).join(' / ') +
+              (r.id == activeRequest?.id ? ' (current)' : ''),
             value: r.id,
           };
         }),
@@ -291,7 +293,7 @@ function buildRequestBreadcrumbs(request: HttpRequest, folders: Folder[]): strin
   };
   next();
 
-  return ancestors.map((a) => (a.model === 'folder' ? a.name : fallbackRequestName(a)));
+  return ancestors.map(resolvedModelName);
 }
 
 function CheckboxArg({

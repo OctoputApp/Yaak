@@ -64,8 +64,7 @@ export function ExportDataDialog({
           <tr>
             <th className="w-6 min-w-0 py-2 text-left pl-1">
               <Checkbox
-                checked={allSelected}
-                indeterminate={!allSelected && !noneSelected}
+                checked={!allSelected && !noneSelected ? 'indeterminate' : allSelected}
                 hideLabel
                 title="All workspaces"
                 onChange={handleToggleAll}

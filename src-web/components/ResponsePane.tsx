@@ -120,7 +120,7 @@ export const ResponsePane = memo(function ResponsePane({ style, className, activ
                 space={2}
                 alignItems="center"
                 className={classNames(
-                  'cursor-default select-none',
+                  'select-none cursor-default',
                   'whitespace-nowrap w-full pl-3 overflow-x-auto font-mono text-sm',
                 )}
               >

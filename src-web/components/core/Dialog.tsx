@@ -96,7 +96,7 @@ export function Dialog({
 
             <div
               className={classNames(
-                'h-full w-full grid grid-cols-[minmax(0,1fr)]',
+                'h-full w-full grid grid-cols-[minmax(0,1fr)] grid-rows-1',
                 !noPadding && 'px-6 py-2',
                 !noScroll && 'overflow-y-auto overflow-x-hidden',
               )}

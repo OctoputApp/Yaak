@@ -4,14 +4,14 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-chrono = { version = "0.4.38", features = ["serde"] }
-rusqlite = { version = "0.31.0", features = ["bundled", "chrono"] }
-sea-query = { version = "0.31.0", features = ["with-chrono", "attr"] }
-sea-query-rusqlite = { version = "0.6.0", features = ["with-chrono"] }
-serde = { version = "1.0.204", features = ["derive"] }
-serde_json = "1.0.122"
-thiserror = "1.0.63"
-ts-rs = { version = "10.0.0", features = ["chrono-impl", "serde-json-impl"] }
+chrono = { workspace = true, features = ["serde"] }
+rusqlite = { workspace = true, features = ["bundled", "chrono"] }
+sea-query = { workspace = true, features = ["with-chrono", "attr"] }
+sea-query-rusqlite = { workspace = true, features = ["with-chrono"] }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+ts-rs = { workspace = true, features = ["chrono-impl", "serde-json-impl"] }
 tauri = { workspace = true }
 sqlx = { version = "0.8.0", features = ["sqlite", "runtime-tokio-rustls"] }
 log = "0.4.22"

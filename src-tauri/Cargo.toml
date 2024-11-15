@@ -1,5 +1,12 @@
 [workspace]
-members = ["yaak_grpc", "yaak_templates", "yaak_plugin_runtime", "yaak_models", "yaak_sse"]
+members = [
+    "tauri-plugin-sync",
+    "yaak_grpc",
+    "yaak_models",
+    "yaak_plugin_runtime",
+    "yaak_sse",
+    "yaak_templates",
+]
 
 [package]
 name = "yaak-app"
@@ -23,30 +30,31 @@ objc = "0.2.7"
 cocoa = "0.26.0"
 
 [target.'cfg(target_os = "linux")'.dependencies]
-openssl-sys = { version = "0.9", features = ["vendored"] } # For Ubuntu installation to work
+openssl-sys = { version = "0.9", features = ["vendored"] } # For Linux installation to work
 
 [dependencies]
-yaak_grpc = { path = "yaak_grpc" }
-yaak_templates = { path = "yaak_templates" }
-yaak_plugin_runtime = { workspace = true }
 yaak_models = { workspace = true }
-yaak_sse = { path = "yaak_sse" }
-anyhow = "1.0.86"
+yaak_plugin_runtime = { workspace = true }
+yaak_grpc = { workspace = true }
+yaak_sse = { workspace = true }
+yaak_templates = { workspace = true }
+anyhow = "1.0.89"
 base64 = "0.22.0"
-chrono = { version = "0.4.31", features = ["serde"] }
+chrono = { workspace = true, features = ["serde"] }
 datetime = "0.5.2"
 hex_color = "3.0.0"
 http = "1"
 log = "0.4.21"
 rand = "0.8.5"
 regex = "1.10.2"
-reqwest = { version = "0.12.4", features = ["multipart", "cookies", "gzip", "brotli", "deflate", "json", "native-tls-alpn"] }
+reqwest = { version = "0.12.7", features = ["multipart", "cookies", "gzip", "brotli", "deflate", "json", "native-tls-alpn"] }
 reqwest_cookie_store = "0.8.0"
-serde = { version = "1.0.198", features = ["derive"] }
-serde_json = { version = "1.0.116", features = ["raw_value"] }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true, features = ["raw_value"] }
 serde_yaml = "0.9.34"
-tauri = { workspace = true }
+tauri = { workspace = true, features = ["devtools", "protocol-asset"] }
 tauri-plugin-shell = { workspace = true }
+tauri-plugin-sync = { workspace = true }
 tauri-plugin-clipboard-manager = "2.0.1"
 tauri-plugin-dialog = "2.0.3"
 tauri-plugin-fs = "2.0.3"
@@ -57,13 +65,25 @@ tauri-plugin-window-state = "2.0.1"
 tokio = { version = "1.36.0", features = ["sync"] }
 tokio-stream = "0.1.15"
 uuid = "1.7.0"
-thiserror = "1.0.61"
+thiserror = { workspace = true }
 mime_guess = "2.0.5"
 urlencoding = "2.1.3"
 eventsource-client = { git = "https://github.com/yaakapp/rust-eventsource-client", version = "0.13.0" }
 
 [workspace.dependencies]
 yaak_models = { path = "yaak_models" }
+yaak_grpc = { path = "yaak_grpc" }
+yaak_sse = { path = "yaak_sse" }
+yaak_templates = { path = "yaak_templates" }
 yaak_plugin_runtime = { path = "yaak_plugin_runtime" }
+tauri-plugin-sync = { path = "tauri-plugin-sync" }
+chrono = "0.4.38"
+rusqlite = "0.31.0"
+serde = "1.0.210"
+serde_json = "1.0.128"
+sea-query = "0.31.0"
+sea-query-rusqlite = "0.6.0"
 tauri-plugin-shell = "2.0.2"
 tauri = { version = "2.0.6", features = ["devtools", "protocol-asset"] }
+thiserror = "1.0.64"
+ts-rs = "10.0.0"

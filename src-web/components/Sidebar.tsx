@@ -43,7 +43,7 @@ import { useUpdateAnyFolder } from '../hooks/useUpdateAnyFolder';
 import { useUpdateAnyGrpcRequest } from '../hooks/useUpdateAnyGrpcRequest';
 import { useUpdateAnyHttpRequest } from '../hooks/useUpdateAnyHttpRequest';
 import { useWorkspaces } from '../hooks/useWorkspaces';
-import { fallbackRequestName } from '../lib/fallbackRequestName';
+import { resolvedModelName } from '../lib/resolvedModelName';
 import { isResponseLoading } from '../lib/model_util';
 import { getHttpRequest } from '../lib/store';
 import type { DropdownItem } from './core/Dropdown';
@@ -54,6 +54,7 @@ import { InlineCode } from './core/InlineCode';
 import { VStack } from './core/Stacks';
 import { StatusTag } from './core/StatusTag';
 import { DropMarker } from './DropMarker';
+import { SyncDropdown } from './SyncDropdown';
 
 interface Props {
   className?: string;
@@ -484,6 +485,7 @@ export function Sidebar({ className }: Props) {
           handleDragStart={handleDragStart}
         />
       </div>
+      <SyncDropdown />
     </aside>
   );
 }
@@ -551,7 +553,7 @@ function SidebarItems({
               itemName={child.item.name}
               itemFallbackName={
                 child.item.model === 'http_request' || child.item.model === 'grpc_request'
-                  ? fallbackRequestName(child.item)
+                  ? resolvedModelName(child.item)
                   : 'New Folder'
               }
               itemModel={child.item.model}

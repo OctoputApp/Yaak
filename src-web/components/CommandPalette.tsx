@@ -27,7 +27,7 @@ import { useScrollIntoView } from '../hooks/useScrollIntoView';
 import { useSendAnyHttpRequest } from '../hooks/useSendAnyHttpRequest';
 import { useSidebarHidden } from '../hooks/useSidebarHidden';
 import { useWorkspaces } from '../hooks/useWorkspaces';
-import { fallbackRequestName } from '../lib/fallbackRequestName';
+import { resolvedModelName } from '../lib/resolvedModelName';
 import { CookieDialog } from './CookieDialog';
 import { Button } from './core/Button';
 import { Heading } from './core/Heading';
@@ -260,11 +260,11 @@ export function CommandPalette({ onClose }: { onClose: () => void }) {
     for (const r of sortedRequests) {
       requestGroup.items.push({
         key: `switch-request-${r.id}`,
-        searchText: fallbackRequestName(r),
+        searchText: resolvedModelName(r),
         label: (
           <HStack space={2}>
             <HttpMethodTag className="text-text-subtlest" request={r} />
-            <div className="truncate">{fallbackRequestName(r)}</div>
+            <div className="truncate">{resolvedModelName(r)}</div>
           </HStack>
         ),
         onSelect: () => {

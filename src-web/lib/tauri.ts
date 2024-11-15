@@ -37,6 +37,7 @@ type TauriCmd =
   | 'cmd_get_sse_events'
   | 'cmd_get_key_value'
   | 'cmd_get_settings'
+  | 'cmd_get_sync_stage'
   | 'cmd_get_workspace'
   | 'cmd_grpc_go'
   | 'cmd_grpc_reflect'

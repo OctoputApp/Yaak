@@ -1,0 +1,6 @@
+{
+  "name": "tauri-plugin-sync-api",
+  "private": true,
+  "version": "0.0.0",
+  "main": "index.ts"
+}

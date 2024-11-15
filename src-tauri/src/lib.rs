@@ -1687,7 +1687,8 @@ pub fn run() {
             .plugin(tauri_plugin_os::init())
             .plugin(tauri_plugin_fs::init())
             .plugin(yaak_models::plugin::Builder::default().build())
-            .plugin(yaak_plugin_runtime::plugin::init());
+            .plugin(yaak_plugin_runtime::plugin::init())
+            .plugin(tauri_plugin_sync::init());
 
     #[cfg(target_os = "macos")]
     {
@@ -1818,13 +1819,14 @@ pub fn run() {
                     ..
                 } => {
                     let h = app_handle.clone();
-                    // Run update check whenever window is focused
+                    // Run update check whenever the window is focused
                     tauri::async_runtime::spawn(async move {
-                        let val: State<'_, Mutex<YaakUpdater>> = h.state();
                         let update_mode = get_update_mode(&h).await;
-                        if let Err(e) = val.lock().await.check(&h, update_mode).await {
+                        let updater: State<'_, Mutex<YaakUpdater>> = h.state();
+                        let mut updater = updater.lock().await;
+                        if let Err(e) = updater.check(&h, update_mode).await {
                             warn!("Failed to check for updates {e:?}");
-                        };
+                        }
                     });
 
                     let h = app_handle.clone();
@@ -1939,7 +1941,7 @@ fn create_window(handle: &AppHandle, config: CreateWindowConfig) -> WebviewWindo
                 if let Err(e) =
                     webview_window.app_handle().shell().open("https://yaak.app/feedback", None)
                 {
-                    warn!("Failed to open feedback {e:?}")
+                    warn!("Failed to open feedback {e:?}");
                 }
             }
 

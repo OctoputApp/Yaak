@@ -21,7 +21,6 @@ pub struct PluginConfig {
     // Nothing yet (will be configurable in tauri.conf.json
 }
 
-/// Tauri SQL plugin builder.
 #[derive(Default)]
 pub struct Builder {
     // Nothing Yet

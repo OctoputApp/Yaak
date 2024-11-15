@@ -149,7 +149,7 @@ impl<'s> TryFrom<&Row<'s>> for Workspace {
             updated_at: r.get("updated_at")?,
             name: r.get("name")?,
             description: r.get("description")?,
-            variables: serde_json::from_str(variables.as_str()).unwrap_or_default(),
+            variables: json_col(variables.as_str()),
             setting_validate_certificates: r.get("setting_validate_certificates")?,
             setting_follow_redirects: r.get("setting_follow_redirects")?,
             setting_request_timeout: r.get("setting_request_timeout")?,
@@ -235,7 +235,7 @@ impl<'s> TryFrom<&Row<'s>> for CookieJar {
             created_at: r.get("created_at")?,
             updated_at: r.get("updated_at")?,
             name: r.get("name")?,
-            cookies: serde_json::from_str(cookies.as_str()).unwrap_or_default(),
+            cookies: json_col(cookies.as_str()),
         })
     }
 }
@@ -281,7 +281,7 @@ impl<'s> TryFrom<&Row<'s>> for Environment {
             created_at: r.get("created_at")?,
             updated_at: r.get("updated_at")?,
             name: r.get("name")?,
-            variables: serde_json::from_str(variables.as_str()).unwrap_or_default(),
+            variables: json_col(variables.as_str()),
         })
     }
 }
@@ -433,13 +433,13 @@ impl<'s> TryFrom<&Row<'s>> for HttpRequest {
             created_at: r.get("created_at")?,
             updated_at: r.get("updated_at")?,
             url: r.get("url")?,
-            url_parameters: serde_json::from_str(url_parameters.as_str()).unwrap_or_default(),
+            url_parameters: json_col(url_parameters.as_str()),
             method: r.get("method")?,
-            body: serde_json::from_str(body.as_str()).unwrap_or_default(),
+            body: json_col(body.as_str()),
             body_type: r.get("body_type")?,
-            authentication: serde_json::from_str(authentication.as_str()).unwrap_or_default(),
+            authentication: json_col(authentication.as_str()),
             authentication_type: r.get("authentication_type")?,
-            headers: serde_json::from_str(headers.as_str()).unwrap_or_default(),
+            headers: json_col(headers.as_str()),
             folder_id: r.get("folder_id")?,
             name: r.get("name")?,
         })
@@ -544,7 +544,7 @@ impl<'s> TryFrom<&Row<'s>> for HttpResponse {
             status_reason: r.get("status_reason")?,
             state: serde_json::from_str(format!(r#""{state}""#).as_str()).unwrap(),
             body_path: r.get("body_path")?,
-            headers: serde_json::from_str(headers.as_str()).unwrap_or_default(),
+            headers: json_col(headers.as_str()),
         })
     }
 }
@@ -633,10 +633,10 @@ impl<'s> TryFrom<&Row<'s>> for GrpcRequest {
             method: r.get("method")?,
             message: r.get("message")?,
             authentication_type: r.get("authentication_type")?,
-            authentication: serde_json::from_str(authentication.as_str()).unwrap_or_default(),
+            authentication: json_col(authentication.as_str()),
             url: r.get("url")?,
             sort_priority: r.get("sort_priority")?,
-            metadata: serde_json::from_str(metadata.as_str()).unwrap_or_default(),
+            metadata: json_col(metadata.as_str()),
         })
     }
 }
@@ -719,7 +719,7 @@ impl<'s> TryFrom<&Row<'s>> for GrpcConnection {
             status: r.get("status")?,
             url: r.get("url")?,
             error: r.get("error")?,
-            trailers: serde_json::from_str(trailers.as_str()).unwrap_or_default(),
+            trailers: json_col(trailers.as_str()),
         })
     }
 }
@@ -796,8 +796,8 @@ impl<'s> TryFrom<&Row<'s>> for GrpcEvent {
             created_at: r.get("created_at")?,
             updated_at: r.get("updated_at")?,
             content: r.get("content")?,
-            event_type: serde_json::from_str(event_type.as_str()).unwrap_or_default(),
-            metadata: serde_json::from_str(metadata.as_str()).unwrap_or_default(),
+            event_type: json_col(event_type.as_str()),
+            metadata: json_col(metadata.as_str()),
             status: r.get("status")?,
             error: r.get("error")?,
         })
@@ -933,7 +933,7 @@ impl ModelType {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, TS)]
 #[serde(rename_all = "camelCase", untagged)]
 #[ts(export, export_to = "models.ts")]
 pub enum AnyModel {
@@ -949,4 +949,11 @@ pub enum AnyModel {
     Settings(Settings),
     KeyValue(KeyValue),
     Workspace(Workspace),
+}
+
+pub fn json_col<'a, T>(s: &'a str) -> T
+where
+    T: Deserialize<'a> + Default,
+{
+    serde_json::from_str(s).unwrap_or_default()
 }

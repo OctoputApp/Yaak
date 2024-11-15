@@ -58,7 +58,6 @@ export const Input = forwardRef<EditorView | undefined, InputProps>(function Inp
     labelClassName,
     labelPosition = 'top',
     leftSlot,
-    name,
     onBlur,
     onChange,
     onFocus,
@@ -91,7 +90,7 @@ export const Input = forwardRef<EditorView | undefined, InputProps>(function Inp
     onBlur?.();
   }, [onBlur]);
 
-  const id = `input-${name}`;
+  const id = `input-${label}`;
   const editorClassName = classNames(
     className,
     '!bg-transparent min-w-0 h-auto w-full focus:outline-none placeholder:text-placeholder',

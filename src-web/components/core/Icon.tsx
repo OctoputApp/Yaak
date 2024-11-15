@@ -27,6 +27,7 @@ const icons = {
   chevron_right: lucide.ChevronRightIcon,
   circle_alert: lucide.CircleAlertIcon,
   clock: lucide.ClockIcon,
+  cloud: lucide.CloudIcon,
   code: lucide.CodeIcon,
   cookie: lucide.CookieIcon,
   copy: lucide.CopyIcon,

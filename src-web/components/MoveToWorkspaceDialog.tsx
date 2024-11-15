@@ -4,7 +4,7 @@ import { useAppRoutes } from '../hooks/useAppRoutes';
 import { useUpdateAnyGrpcRequest } from '../hooks/useUpdateAnyGrpcRequest';
 import { useUpdateAnyHttpRequest } from '../hooks/useUpdateAnyHttpRequest';
 import { useWorkspaces } from '../hooks/useWorkspaces';
-import { fallbackRequestName } from '../lib/fallbackRequestName';
+import { resolvedModelName } from '../lib/resolvedModelName';
 import { Button } from './core/Button';
 import { InlineCode } from './core/InlineCode';
 import { Select } from './core/Select';
@@ -58,7 +58,7 @@ export function MoveToWorkspaceDialog({ onDone, request, activeWorkspaceId }: Pr
             id: 'workspace-moved',
             message: (
               <>
-                <InlineCode>{fallbackRequestName(request)}</InlineCode> moved to{' '}
+                <InlineCode>{resolvedModelName(request)}</InlineCode> moved to{' '}
                 <InlineCode>
                   {workspaces.find((w) => w.id === selectedWorkspaceId)?.name ?? 'unknown'}
                 </InlineCode>

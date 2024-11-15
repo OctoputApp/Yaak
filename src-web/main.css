@@ -26,7 +26,7 @@
     @apply select-none cursor-default;
   }
 
-    input,
+  input,
   textarea {
     &::placeholder {
       @apply text-placeholder;

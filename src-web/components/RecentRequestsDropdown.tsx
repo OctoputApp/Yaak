@@ -9,7 +9,7 @@ import { useAppRoutes } from '../hooks/useAppRoutes';
 import { useHotKey } from '../hooks/useHotKey';
 import { useRecentRequests } from '../hooks/useRecentRequests';
 import { useRequests } from '../hooks/useRequests';
-import { fallbackRequestName } from '../lib/fallbackRequestName';
+import { resolvedModelName } from '../lib/resolvedModelName';
 import type { ButtonProps } from './core/Button';
 import { Button } from './core/Button';
 import type { DropdownItem, DropdownRef } from './core/Dropdown';
@@ -53,7 +53,7 @@ export function RecentRequestsDropdown({ className }: Pick<ButtonProps, 'classNa
 
       recentRequestItems.push({
         key: request.id,
-        label: fallbackRequestName(request),
+        label: resolvedModelName(request),
         // leftSlot: <CountBadge className="!ml-0 px-0 w-5" count={recentRequestItems.length} />,
         leftSlot: <HttpMethodTag className="text-right" shortNames request={request} />,
         onSelect: () => {
@@ -78,7 +78,7 @@ export function RecentRequestsDropdown({ className }: Pick<ButtonProps, 'classNa
       ];
     }
 
-    return recentRequestItems.slice(0, 20);
+    return recentRequestItems;
   }, [activeWorkspace, recentRequestIds, requests, routes, activeEnvironment?.id, activeCookieJar?.id]);
 
   return (
@@ -93,7 +93,7 @@ export function RecentRequestsDropdown({ className }: Pick<ButtonProps, 'classNa
           activeRequest === null && 'text-text-subtlest italic',
         )}
       >
-        {fallbackRequestName(activeRequest)}
+        {activeRequest == null ? 'No Request' : resolvedModelName(activeRequest)}
       </Button>
     </Dropdown>
   );

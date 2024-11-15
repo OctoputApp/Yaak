@@ -13,6 +13,7 @@
     "src-tauri/yaak_plugin_runtime",
     "src-tauri/yaak_sync",
     "src-tauri/yaak_templates",
+    "src-tauri/tauri-plugin-sync",
     "src-tauri/yaak_sse",
     "src-web"
   ],

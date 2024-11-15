@@ -13,7 +13,7 @@ export function EmptyStateText({ children, className }: Props) {
       className={classNames(
         className,
         'rounded-lg border border-dashed border-border-subtle',
-        'h-full py-2 text-text-subtlest flex items-center justify-center italic',
+        'h-full py-2 text-text-subtlest flex items-center text-center justify-center italic',
       )}
     >
       {children}
